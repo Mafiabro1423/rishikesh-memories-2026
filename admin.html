@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#090d12">
+<title>Admin Dashboard | Rishikesh Memories 2026</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#090d12;color:#f5f5f5;font-family:Arial,sans-serif}
+header{padding:22px 18px;border-bottom:1px solid #29313b;display:flex;justify-content:space-between;align-items:center}
+.brand{font-family:Georgia,serif;font-size:19px}
+.brand span{color:#d9bd83}
+.status{font-size:11px;color:#9ed7a5}
+main{max-width:1000px;margin:auto;padding:25px 18px}
+h1{font-family:Georgia,serif;font-size:32px;margin:15px 0 8px}
+.sub{color:#929ba6;font-size:13px;line-height:1.6}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:28px 0}
+.stat,.panel{background:#131b24;border:1px solid #293542;border-radius:15px;padding:20px}
+.stat small{color:#9ba5b0}
+.stat strong{display:block;font-size:27px;margin-top:12px;color:#d9bd83}
+.panel{margin-bottom:20px}
+h2{font-size:18px;margin-bottom:12px}
+.panel p{color:#929ba6;font-size:13px;line-height:1.6}
+.drop{border:1px dashed #a58b5e;border-radius:13px;padding:30px 12px;text-align:center;margin:18px 0}
+.drop .emoji{font-size:38px}
+button,.choose{display:inline-block;border:0;border-radius:30px;padding:14px 20px;background:#d9bd83;color:#111;font-weight:bold;font-size:13px;cursor:pointer}
+.choose{margin-top:15px}
+input{display:none}
+#preview{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:18px}
+.photo{background:#202a35;border-radius:10px;overflow:hidden}
+.photo img{width:100%;height:125px;object-fit:cover;display:block}
+.photo div{padding:8px;font-size:11px;overflow-wrap:anywhere;color:#cbd1d8}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:15px}
+.outline{background:transparent;color:#d9bd83;border:1px solid #8c7955}
+.warning{font-size:12px;color:#e4bd79;margin-top:14px}
+footer{text-align:center;padding:25px;color:#78828e;font-size:11px}
+@media(min-width:650px){.stats{grid-template-columns:repeat(4,1fr)}#preview{grid-template-columns:repeat(4,1fr)}}
+</style>
+</head>
+<body>
+<header>
+<div class="brand">RISHIKESH <span>MEMORIES</span></div>
+<div class="status">● ADMIN DEMO</div>
+</header>
+
+<main>
+<p class="sub">RISHIKESH MEMORIES 2026 / CONTROL PANEL</p>
+<h1>Welcome, Admin 👋</h1>
+<p class="sub">Manage your trip photographs and memories from one place.</p>
+
+<div class="stats">
+<div class="stat"><small>Total Photos Selected</small><strong id="count">0</strong></div>
+<div class="stat"><small>Storage Status</small><strong style="font-size:17px">Not Connected</strong></div>
+<div class="stat"><small>AI Face Search</small><strong style="font-size:17px">Pending</strong></div>
+<div class="stat"><small>Website</small><strong style="font-size:17px">Online</strong></div>
+</div>
+
+<div class="panel">
+<h2>📸 Upload Trip Photos</h2>
+<p>Select multiple DSLR photographs from your iPhone or computer.</p>
+<div class="drop">
+<div class="emoji">🖼️</div>
+<h3 style="margin:12px 0">Choose Your Memories</h3>
+<p>Multiple image selection supported in this demo</p>
+<label class="choose" for="photos">SELECT PHOTOS</label>
+<input type="file" id="photos" accept="image/*" multiple>
+</div>
+<div id="preview"></div>
+<p id="message" class="warning">No photos selected yet.</p>
+</div>
+
+<div class="panel">
+<h2>☁️ Google Drive Storage</h2>
+<p>Connect Google Drive in the next development phase to store original DSLR photographs securely.</p>
+<div class="actions">
+<button class="outline" onclick="alert('Google Drive integration will be configured in the next phase.')">CONNECT GOOGLE DRIVE</button>
+</div>
+</div>
+
+<div class="panel">
+<h2>🤖 AI Face Search</h2>
+<p>AI face matching will identify visitor photographs from their uploaded selfie after backend integration.</p>
+<div class="warning">Status: Backend integration pending.</div>
+</div>
+
+<div class="panel">
+<h2>🌐 Website Management</h2>
+<p>Your public gallery website is deployed on Cloudflare Pages.</p>
+<div class="actions">
+<button onclick="window.open('https://rishikesh-memories-2026.pages.dev','_blank')">OPEN WEBSITE ↗</button>
+</div>
+</div>
+</main>
+
+<footer>RISHIKESH MEMORIES 2026 · ADMIN PANEL</footer>
+
+<script>
+const input=document.getElementById('photos');
+const preview=document.getElementById('preview');
+const count=document.getElementById('count');
+const message=document.getElementById('message');
+let urls=[];
+
+input.addEventListener('change',function(){
+urls.forEach(url=>URL.revokeObjectURL(url));
+urls=[];
+preview.innerHTML='';
+const files=Array.from(input.files||[]);
+const images=files.filter(file=>file.type.startsWith('image/'));
+count.textContent=images.length;
+images.forEach(file=>{
+const url=URL.createObjectURL(file);
+urls.push(url);
+const card=document.createElement('div');
+card.className='photo';
+const img=document.createElement('img');
+img.src=url;
+img.alt='Selected photo';
+const name=document.createElement('div');
+name.textContent=file.name;
+card.appendChild(img);
+card.appendChild(name);
+preview.appendChild(card);
+});
+message.textContent=images.length
+? images.length+' photos selected. These are local previews only; nothing has been uploaded.'
+:'No photos selected yet.';
+});
+</script>
+</body>
+</html>
