@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080d12">
+<title>Rishikesh Memories 2026</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#080d12;color:white}
+.hero{
+min-height:90vh;display:flex;flex-direction:column;
+justify-content:center;align-items:center;text-align:center;
+padding:35px 22px;
+background:linear-gradient(#07101b99,#07101be8),
+url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1400') center/cover;
+}
+.tag{color:#d9bd83;letter-spacing:4px;font-size:11px;margin-bottom:24px}
+h1{font-family:Georgia,serif;font-size:clamp(43px,10vw,76px);line-height:1.08}
+h1 span{color:#d9bd83}
+.subtitle{color:#d1d5db;line-height:1.7;margin:22px 0 30px;max-width:420px}
+.btn{border:0;border-radius:40px;padding:17px 30px;background:#d9bd83;color:#111;font-weight:bold;font-size:15px;cursor:pointer}
+.secondary{background:transparent;color:white;border:1px solid #ffffff80;margin-top:12px}
+section{padding:65px 22px;text-align:center}
+h2{font-family:Georgia,serif;font-size:32px;margin-bottom:15px}
+.desc{color:#9ca3af;line-height:1.7;max-width:480px;margin:0 auto 30px}
+.upload{border:1px dashed #b69b69;border-radius:20px;padding:35px 18px;max-width:440px;margin:auto;background:#111923}
+.upload input{display:none}
+.upload label{display:inline-block;margin-top:20px;cursor:pointer}
+#preview{display:none;width:110px;height:110px;object-fit:cover;border-radius:50%;margin:20px auto}
+#message{color:#d9bd83;margin-top:15px;font-size:13px}
+.features{display:grid;grid-template-columns:1fr 1fr;gap:13px;max-width:600px;margin:auto}
+.feature{background:#121b24;border:1px solid #293440;padding:25px 12px;border-radius:16px}
+.feature b{display:block;margin:10px 0}
+.feature p{font-size:12px;color:#9ca3af;line-height:1.5}
+footer{padding:30px;text-align:center;color:#777;border-top:1px solid #27303a;font-size:12px}
+</style>
+</head>
+<body>
+<header class="hero">
+<div class="tag">A JOURNEY TO REMEMBER • 2026</div>
+<h1>Rishikesh<br><span>Memories</span></h1>
+<p class="subtitle">Every moment has a story. Find your unforgettable Rishikesh trip photographs with us.</p>
+<button class="btn" onclick="document.getElementById('find').scrollIntoView({behavior:'smooth'})">FIND MY PHOTOS →</button>
+</header>
+
+<section id="find">
+<h2>Find Your Memories</h2>
+<p class="desc">Upload a clear selfie to start finding your trip photographs.</p>
+<div class="upload">
+<div style="font-size:42px">📸</div>
+<h3 style="margin-top:12px">Upload Your Selfie</h3>
+<p class="desc" style="margin:12px auto 0;font-size:13px">Choose a clear front-facing photo of yourself.</p>
+<img id="preview" alt="Selfie preview">
+<label class="btn" for="selfie">CHOOSE SELFIE</label>
+<input id="selfie" type="file" accept="image/*">
+<p id="message">AI photo matching will be connected in the next phase.</p>
+</div>
+</section>
+
+<section>
+<h2>Your Trip, Your Memories</h2>
+<p class="desc">Relive every adventure and every beautiful moment.</p>
+<div class="features">
+<div class="feature"><div style="font-size:30px">🌊</div><b>River Rafting</b><p>Feel the thrill of the Ganga.</p></div>
+<div class="feature"><div style="font-size:30px">🏔️</div><b>Nature & Views</b><p>Beautiful mountain memories.</p></div>
+<div class="feature"><div style="font-size:30px">🚐</div><b>Sightseeing</b><p>Explore unforgettable places.</p></div>
+<div class="feature"><div style="font-size:30px">❤️</div><b>Best Moments</b><p>Memories to last forever.</p></div>
+</div>
+</section>
+
+<footer>
+RISHIKESH MEMORIES 2026<br><br>
+Captured with memories. Made with love.
+</footer>
+
+<script>
+document.getElementById('selfie').addEventListener('change',function(e){
+const file=e.target.files[0];
+if(!file)return;
+if(!file.type.startsWith('image/')){
+document.getElementById('message').textContent='Please select an image.';
+return;
+}
+const preview=document.getElementById('preview');
+preview.src=URL.createObjectURL(file);
+preview.style.display='block';
+document.getElementById('message').textContent='Selfie selected! AI matching will be activated after backend setup.';
+});
+</script>
+</body>
+</html>
